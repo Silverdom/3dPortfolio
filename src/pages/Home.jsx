@@ -7,6 +7,8 @@ import Plane from '../models/Plane';
 import Bird from '../models/Bird';
 
 const Home = () => {
+
+  // This function will adjust the island scale, position and rotation based on screen size.
   const adjustIslandForScreenSize = () => {
     let screenScale = null;
     let screenPosition = [0, -6.5, -43];
@@ -25,14 +27,14 @@ const Home = () => {
 
   return (
     <section className='w-full h-screen relative'>
-      {/* <div className='absolute top-28 left-0 right-0 z-10 flex items-center justify-content'>
-        Popup
-      </div> */}
+      {/* To render a 3d model use need to use Canvas component. */}
       <Canvas
         className='w-full h-screen bg-transparent'
         camera={ { near: 0.1, far: 1000 } }
       >
+        {/* This is a react component which shows the fallback component until the children are loaded. */}
         <Suspense fallback={ <Loader /> }>
+          {/* Different lighting to illuminate the model such as directional, ambient, hemisphere, point, spot. */}
           <directionalLight position={ [1, 1, 1] } intensity={ 2 } />
           <ambientLight intensity={ 0.5 } />
           <hemisphereLight skyColor="#b1e1ff" groundColor='#000000'

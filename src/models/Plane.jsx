@@ -6,7 +6,7 @@ const Plane = () => {
   const {scene, animations} = useGLTF(planeScene);
   return (
     <mesh>
-      <primitive object={scene} />
+      <primitive object={scene}  />
     </mesh>
   )
 }

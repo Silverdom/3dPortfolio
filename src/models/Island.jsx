@@ -6,6 +6,9 @@ Source: https://sketchfab.com/3d-models/foxs-islands-163b68e09fcc47618450150be77
 Title: Fox's islands
 */
 
+// This file was generated from https://gltf.pmnd.rs where we need to put glb models
+// and the site will generate the jsx file for three js. We can get glb models from sketchfab site.
+
 import React, { useRef, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
