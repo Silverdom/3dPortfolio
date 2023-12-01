@@ -7,7 +7,8 @@ import Plane from '../models/Plane';
 import Bird from '../models/Bird';
 
 const Home = () => {
-  const [isRotating, setisRotating] = useState(false);
+  const [isRotating, setIsRotating] = useState(false);
+  const [currentStage, setCurrentStage] = useState(1);
 
   // This function will adjust the island scale, position and rotation based on screen size.
   const adjustIslandForScreenSize = () => {
@@ -58,13 +59,16 @@ const Home = () => {
           <hemisphereLight skyColor="#b1e1ff" groundColor='#000000'
             intensity={ 1 } />
           <Bird />
-          <Sky />
+          <Sky 
+            isRotating={isRotating}
+          />
           <Island
             position={ islandPosition }
             scale={ islandScale }
             rotation={ islandRotation }
             isRotating={ isRotating }
-            setisRotating={ setisRotating }
+            setIsRotating={ setIsRotating }
+            setCurrentStage={ setCurrentStage }
           />
           <Plane
             planePosition={ planePosition }
