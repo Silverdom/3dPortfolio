@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import Loader from '../components/Loader';
 import Island from '../models/island';
@@ -7,6 +7,7 @@ import Plane from '../models/Plane';
 import Bird from '../models/Bird';
 
 const Home = () => {
+  const [isRotating, setisRotating] = useState(false);
 
   // This function will adjust the island scale, position and rotation based on screen size.
   const adjustIslandForScreenSize = () => {
@@ -23,18 +24,35 @@ const Home = () => {
     return [screenScale, screenPosition, rotation];
   }
 
+  // This function will adjust the Plane scale, position and rotation based on screen size.
+  const adjustPlaneForScreenSize = () => {
+    let screenScale, screenPosition;
+    let rotation = [0.1, 4.7, 0];
+
+    if (window.innerWidth < 786) {
+      screenScale = [1.5, 1.5, 1.5];
+      screenPosition = [0, -1.5, 0];
+    } else {
+      screenScale = [3, 3, 3];
+      screenPosition = [0, -4, -4];
+    }
+
+    return [screenScale, screenPosition];
+  }
+
   const [islandScale, islandPosition, islandRotation] = adjustIslandForScreenSize();
+  const [planeScale, planePosition] = adjustPlaneForScreenSize();
 
   return (
     <section className='w-full h-screen relative'>
-      {/* To render a 3d model use need to use Canvas component. */}
+      {/* To render a 3d model use need to use Canvas component. */ }
       <Canvas
-        className='w-full h-screen bg-transparent'
+        className={ `w-full h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}` }
         camera={ { near: 0.1, far: 1000 } }
       >
-        {/* This is a react component which shows the fallback component until the children are loaded. */}
+        {/* This is a react component which shows the fallback component until the children are loaded. */ }
         <Suspense fallback={ <Loader /> }>
-          {/* Different lighting to illuminate the model such as directional, ambient, hemisphere, point, spot. */}
+          {/* Different lighting to illuminate the model such as directional, ambient, hemisphere, point, spot. */ }
           <directionalLight position={ [1, 1, 1] } intensity={ 2 } />
           <ambientLight intensity={ 0.5 } />
           <hemisphereLight skyColor="#b1e1ff" groundColor='#000000'
@@ -45,8 +63,15 @@ const Home = () => {
             position={ islandPosition }
             scale={ islandScale }
             rotation={ islandRotation }
+            isRotating={ isRotating }
+            setisRotating={ setisRotating }
           />
-          <Plane />
+          <Plane
+            planePosition={ planePosition }
+            planeScale={ planeScale }
+            isRotating={ isRotating }
+            rotation={ [0, 20, 0] }
+          />
         </Suspense>
       </Canvas>
     </section>

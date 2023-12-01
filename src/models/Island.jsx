@@ -16,7 +16,7 @@ import { a } from "@react-spring/three";
 
 import islandScene from '../assets/3d/island.glb';
 
-const Island = (props) => {
+const Island = ({isRotating, setIsRotating, ...props}) => {
   const { nodes, materials } = useGLTF(islandScene);
   const islandRef = useRef();
   return (
