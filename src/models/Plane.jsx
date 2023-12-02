@@ -8,11 +8,11 @@ const Plane = ({ isRotating, propellerRotate, ...props }) => {
   const { actions } = useAnimations(animations, ref);
 
   useEffect(() => {
-    if (propellerRotate) {
+    // if (propellerRotate) {
       actions['Take 001'].play();
-    }else {
-      actions['Take 001'].stop();
-    }
+    // }else {
+      // actions['Take 001'].stop();
+    // }
   }, [actions, propellerRotate])
 
   return (
