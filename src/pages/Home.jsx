@@ -5,7 +5,7 @@ import Island from '../models/island';
 import Sky from '../models/Sky';
 import Plane from '../models/Plane';
 import Bird from '../models/Bird';
-import Robbot from '../models/Robbot';
+import { SpotLight } from '@react-three/drei';
 
 const Home = () => {
   const [isRotating, setIsRotating] = useState(false);
@@ -21,7 +21,7 @@ const Home = () => {
     if (window.innerWidth < 786) {
       screenScale = [0.9, 0.9, 0.9];
     } else {
-      screenScale = [1, 1, 1];
+      screenScale = [1.05, 1.05, 1.05];
     }
 
     return [screenScale, screenPosition, rotation];
@@ -35,8 +35,8 @@ const Home = () => {
       screenScale = [1.5, 1.5, 1.5];
       screenPosition = [0, -1.5, 0];
     } else {
-      screenScale = [3, 3, 3];
-      screenPosition = [0, -4, -4];
+      screenScale = [4, 4, 4];
+      screenPosition = [0, -4, -6];
     }
 
     return [screenScale, screenPosition];
@@ -74,8 +74,8 @@ const Home = () => {
             setPropellerRotate={ setPropellerRotate }
           />
           <Plane
-            planePosition={ planePosition }
-            planeScale={ planeScale }
+            position={ planePosition }
+            scale={ planeScale }
             isRotating={ isRotating }
             propellerRotate={ propellerRotate }
             rotation={ [0, 20, 0] }
