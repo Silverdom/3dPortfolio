@@ -16,7 +16,7 @@ import { a } from "@react-spring/three";
 
 import islandScene from '../assets/3d/island.glb';
 
-const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
+const Island = ({ isRotating, setIsRotating, setCurrentStage, setPropellerRotate, ...props }) => {
   const islandRef = useRef();
 
   // Three render hook.
@@ -31,6 +31,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     e.stopPropagation();
     e.preventDefault();
     setIsRotating(true);
+    setPropellerRotate(true);
 
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
 
@@ -66,6 +67,7 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
 
       if (Math.abs(rotationSpeed.current) < 0.001) {
         rotationSpeed.current = 0;
+        setPropellerRotate(false);
       }
 
       islandRef.current.rotation.y += rotationSpeed.current;

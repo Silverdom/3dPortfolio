@@ -5,10 +5,12 @@ import Island from '../models/island';
 import Sky from '../models/Sky';
 import Plane from '../models/Plane';
 import Bird from '../models/Bird';
+import Robbot from '../models/Robbot';
 
 const Home = () => {
   const [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
+  const [propellerRotate, setPropellerRotate] = useState(false);
 
   // This function will adjust the island scale, position and rotation based on screen size.
   const adjustIslandForScreenSize = () => {
@@ -28,7 +30,6 @@ const Home = () => {
   // This function will adjust the Plane scale, position and rotation based on screen size.
   const adjustPlaneForScreenSize = () => {
     let screenScale, screenPosition;
-    let rotation = [0.1, 4.7, 0];
 
     if (window.innerWidth < 786) {
       screenScale = [1.5, 1.5, 1.5];
@@ -59,8 +60,9 @@ const Home = () => {
           <hemisphereLight skyColor="#b1e1ff" groundColor='#000000'
             intensity={ 1 } />
           <Bird />
-          <Sky 
-            isRotating={isRotating}
+          <Sky
+            isRotating={ isRotating }
+            propellerRotate={ propellerRotate }
           />
           <Island
             position={ islandPosition }
@@ -69,11 +71,13 @@ const Home = () => {
             isRotating={ isRotating }
             setIsRotating={ setIsRotating }
             setCurrentStage={ setCurrentStage }
+            setPropellerRotate={ setPropellerRotate }
           />
           <Plane
             planePosition={ planePosition }
             planeScale={ planeScale }
             isRotating={ isRotating }
+            propellerRotate={ propellerRotate }
             rotation={ [0, 20, 0] }
           />
         </Suspense>
