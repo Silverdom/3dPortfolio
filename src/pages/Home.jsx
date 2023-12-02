@@ -6,6 +6,7 @@ import Sky from '../models/Sky';
 import Plane from '../models/Plane';
 import Bird from '../models/Bird';
 import { SpotLight } from '@react-three/drei';
+import HomeInfo from '../components/HomeInfo';
 
 const Home = () => {
   const [isRotating, setIsRotating] = useState(false);
@@ -15,13 +16,13 @@ const Home = () => {
   // This function will adjust the island scale, position and rotation based on screen size.
   const adjustIslandForScreenSize = () => {
     let screenScale = null;
-    let screenPosition = [0, -6.5, -43];
+    let screenPosition = [0, -0.7, 0];
     let rotation = [0.1, 4.7, 0];
 
     if (window.innerWidth < 786) {
       screenScale = [0.9, 0.9, 0.9];
     } else {
-      screenScale = [1.05, 1.05, 1.05];
+      screenScale = [0.11, 0.11, 0.11];
     }
 
     return [screenScale, screenPosition, rotation];
@@ -33,10 +34,10 @@ const Home = () => {
 
     if (window.innerWidth < 786) {
       screenScale = [1.5, 1.5, 1.5];
-      screenPosition = [0, -1.5, 0];
+      screenPosition = [0, -1.5, 1];
     } else {
-      screenScale = [4, 4, 4];
-      screenPosition = [0, -4, -6];
+      screenScale = [0.7, 0.7, 0.7];
+      screenPosition = [0, -0.5, 3.5];
     }
 
     return [screenScale, screenPosition];
@@ -47,6 +48,10 @@ const Home = () => {
 
   return (
     <section className='w-full h-screen relative'>
+      <div className='absolute top-28 left-0 right-0 z-10 flex items-center justify-center'>
+        {currentStage && <HomeInfo currentStage={currentStage}/>}
+      </div>
+
       {/* To render a 3d model use need to use Canvas component. */ }
       <Canvas
         className={ `w-full h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}` }
